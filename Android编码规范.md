@@ -31,14 +31,14 @@
   3.Color资源命名，组件名+具体作用名。
 
     ```
-       例R.color.button_text;
+       例:R.color.button_text;
     ```
 
   4.String资源命名，具体功能。
 
 
     ```
-       例R.string.hello;
+       例:R.string.hello;
     ```
 
   5.Drawable资源命名，ic_具体模块_功能。
