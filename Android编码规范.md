@@ -25,20 +25,20 @@
   2.控件id命名，控件缩写_功能名。
 
    ```
-    例TextView,命名为tv_title。
+    例TextView,命名为tv_title;
    ```
 
   3.Color资源命名，组件名+具体作用名。
 
     ```
-     例R.color.button_text。
+     例R.color.button_text;
     ```
 
   4.String资源命名，具体功能。
 
 
     ```
-     例R.string.hello。
+     例R.string.hello;
     ```
 
   5.Drawable资源命名，ic_具体模块_功能。
@@ -46,11 +46,11 @@
   6.Layout命名，模块_功能。
 
    ```
-      例R.layout_login_bottom。
+      例R.layout_login_bottom;
    ```
 
   7.Menu命名，menu_模块名。
 
    ```
-      例menu_login。
+      例menu_login;
    ```
