@@ -1,0 +1,4 @@
+<resources >
+    <string name="app_name" >update</string >
+    <string name="background_download" >后台下载中...</string >
+</resources >

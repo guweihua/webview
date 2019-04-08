@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+
+    <style name="dialog" parent="@style/Base.Theme.AppCompat.Dialog" >
+        <item name="android:windowFrame" >@null</item ><!-- 边框 -->
+        <item name="android:windowIsFloating" >true</item ><!-- 是否浮现在activity之上 -->
+        <item name="windowActionBar" >false</item >
+        <item name="android:windowIsTranslucent" >true</item >
+        <item name="android:windowNoTitle" >true</item ><!-- 是否无标题 -->
+        <item name="android:background" >@android:color/transparent</item >
+        <item name="android:windowBackground" >@android:color/transparent</item >
+        <item name="android:backgroundDimEnabled" >true</item >
+        <item name="android:backgroundDimAmount" >0.6</item >
+        <item name="android:layout_marginLeft" >1dp</item >
+        <item name="android:layout_marginRight" >1dp</item >
+
+    </style >
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" >
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary" >@color/colorPrimary</item >
+        <item name="colorPrimaryDark" >@color/colorPrimaryDark</item >
+        <item name="colorAccent" >@color/colorAccent</item >
+        <item name="windowActionBar" >false</item >
+        <item name="windowNoTitle" >true</item >
+    </style >
+
+    <declare-styleable name="TitleBar" >
+        <attr name="title_bar_title" format="string" />
+        <attr name="title_bar_right_text" format="string" />
+        <attr name="title_bar_left_text" format="string" />
+        <attr name="title_bar_right_img" format="reference" />
+        <attr name="title_bar_right_left_img" format="reference" />
+        <attr name="title_bar_left_img" format="reference" />
+        <attr name="title_bar_style" format="integer" />
+        <attr name="title_bar_left_img_enabled" format="boolean" />
+    </declare-styleable >
+
+    <style name="dialog_progress" parent="@style/Base.Theme.AppCompat.Dialog" >
+        <item name="android:windowFrame" >@null</item >
+        <item name="android:windowIsFloating" >true</item >
+        <item name="windowActionBar" >false</item >
+        <item name="android:windowIsTranslucent" >true</item >
+        <item name="android:windowNoTitle" >true</item >
+        <item name="android:background" >@android:color/transparent</item >
+        <item name="android:windowBackground" >@android:color/transparent</item >
+        <item name="android:backgroundDimEnabled" >true</item >
+        <item name="android:backgroundDimAmount" >0.6</item >
+        <item name="android:layout_marginLeft" >1dp</item >
+        <item name="android:layout_marginRight" >1dp</item >
+        <item name="android:layout_marginBottom" >30dp</item >
+    </style >
+
+    <style name="dialogAnimCenter" >
+        <item name="android:windowEnterAnimation" >@anim/dialog_main_show_amination</item >
+        <item name="android:windowExitAnimation" >@anim/dialog_main_hide_amination</item >
+    </style >
+
+    <!-- Dialog样式 -->
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog" >
+        <item name="android:windowFrame" >@null</item ><!--  边框-->
+        <item name="android:windowIsFloating" >true</item ><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent" >false</item ><!--半透明-->
+        <item name="android:windowNoTitle" >true</item ><!--无标题-->
+        <item name="android:windowBackground" >@android:color/transparent</item >
+        <item name="android:windowContentOverlay" >@null</item >
+    </style >
+
+    <style name="divider_horizontal" ><!-- 水平分割线 -->
+        <item name="android:layout_width" >fill_parent</item >
+        <item name="android:layout_height" >0.01dp</item >
+        <item name="android:background" >@android:color/darker_gray</item >
+        <item name="android:orientation" >vertical</item >
+    </style >
+
+    <style name="divider_vertical" ><!-- 垂直分割线 -->
+        <item name="android:layout_width" >0.01dp</item >
+        <item name="android:layout_height" >fill_parent</item >
+        <item name="android:background" >@android:color/darker_gray</item >
+        <item name="android:orientation" >vertical</item >
+    </style >
+
+    <style name="dialogAnim" parent="android:Animation" >
+        <item name="android:windowEnterAnimation" >@anim/dialog_show</item >
+        <item name="android:windowExitAnimation" >@anim/dialog_dismiss</item >
+    </style >
+
+
+</resources >

@@ -4,27 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
 
-
-    <wendu.webviewjavascriptbridge.WVJBWebView
-        android:id="@+id/wvjbwebview"
-        android:visibility="gone"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    </wendu.webviewjavascriptbridge.WVJBWebView >
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+        </FrameLayout >
 
+        <com.example.base.widget.baseview.LineView
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        <com.example.weihuagu.myprogram.widget.MainMenu
+            android:id="@+id/main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_bg" >
+        </com.example.weihuagu.myprogram.widget.MainMenu >
 
-    </WebView >
-
+    </LinearLayout >
 
 </LinearLayout >

@@ -38,7 +38,7 @@
 
 
     ```
-       例:R.string.hello;
+       例R.string.hello;
     ```
 
   5.Drawable资源命名，ic_具体模块_功能。

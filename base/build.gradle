@@ -1,0 +1,47 @@
+//apply from: rootProject.file('cc-settings.gradle')
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion Integer.valueOf("$min_sdk_version")
+        targetSdkVersion Integer.valueOf("$target_sdk_version")
+        versionCode Integer.valueOf("$application_version_code")
+        versionName "$application_version_name"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4G"
+    }
+}
+
+
+dependencies {
+    implementation "com.android.support:appcompat-v7:$support_version"
+    compile 'cn.bingoogolapple:bga-swipebacklayout:1.1.9@aar'
+    implementation "com.android.support:design:$support_version"
+
+    implementation 'io.reactivex:rxjava:1.2.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'com.google.code.gson:gson:2.8.1'
+
+    implementation 'com.githang:status-bar-compat:0.7'
+    implementation 'com.jaeger.statusbaruitl:library:1.4.0'
+    implementation 'org.dync.kathline:swipebackactivity:1.0.1'
+
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <color name="color_page_bg" >#efefef</color >
+    <color name="white" >#FFFFFF</color >
+
+    <color name="colorPrimary" >#ffffff</color >
+    <color name="colorPrimaryDark" >#ffffff</color >
+    <color name="colorAccent" >#FF4081</color >
+    <color name="tv_black" >#000</color >
+    <color name="tv_color_pink" >#ff6876</color >
+
+    <color name="color_train_red" >#da0079</color >
+    <color name="train_lock_tv_blue4" >#0048fc</color >
+    <color name="transparent" >#00000000</color >
+
+
+</resources >

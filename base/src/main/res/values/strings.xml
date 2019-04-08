@@ -1,0 +1,12 @@
+<resources >
+    <string name="app_name" >Base</string >
+    <string name="time_out" >请求超时</string >
+    <string name="loading" >正在加载...</string >
+    <string name="please_wait_for_a_while" >请稍后</string >
+    <string name="load" >加载中..</string >
+    <string name="prompt_information" >提示信息</string >
+    <string name="ensure" >确定</string >
+    <string name="cancel" >取消</string >
+    <string name="confirm" >确定</string >
+    <string name="open_corresponding_permissions" >请到设置-应用权限管理界面 开启相应权限再进行尝试</string >
+</resources >
