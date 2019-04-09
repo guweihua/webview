@@ -85,5 +85,27 @@
         <item name="android:windowExitAnimation" >@anim/dialog_dismiss</item >
     </style >
 
+    <declare-styleable name="LineEditView" >
+        <attr name="arrow_right_text" format="string" />
+        <attr name="t_title" format="string" />
+        <attr name="t_value" format="string" />
+        <attr name="t_value_gravity" format="string" />
+        <attr name="img_right_src" format="reference" />
+        <attr name="img_left_src" format="reference" />
+        <attr name="subtitle_img_left_src" format="reference" />
+        <attr name="arrow_show" format="boolean" />
+        <attr name="edit_able" format="boolean" />
+        <attr name="img_right_padding" format="dimension" />
+        <attr name="t_value_margin" format="dimension" />
+        <attr name="t_value_hint" format="string" />
+        <attr name="line_able" format="boolean" />
+        <attr name="t_value_input_type" >
+            <flag name="text" value="0x00000001" />
+            <flag name="phone" value="0x00000003" />
+            <flag name="number" value="0x00000002" />
+        </attr >
+    </declare-styleable >
+
+
 
 </resources >

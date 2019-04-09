@@ -6,4 +6,6 @@
     <color name="color_bg" >#FFFFFF</color >
     <color name="tvBlack" >#999999</color >
     <color name="tvPrimary" >#607D8B</color >
+    <color name="textTitle" >#46475e</color >
+
 </resources >

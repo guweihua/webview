@@ -1,15 +1,18 @@
 package com.example.base.common;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.base.utils.MyStatusBarUtil;
-import com.githang.statusbar.StatusBarCompat;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private Unbinder unBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -17,8 +20,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 //        StatusBarCompat.setStatusBarColor(this, Color.WHITE);
 
+
+
+
         setContentView(provideContentViewId());
 
+        unBinder = ButterKnife.bind(this);
         setStatusBar();
 
         initThings(savedInstanceState);
@@ -68,5 +75,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (unBinder != null) {
+            unBinder.unbind();
+        }
+    }
 }

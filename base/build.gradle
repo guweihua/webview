@@ -1,5 +1,6 @@
 //apply from: rootProject.file('cc-settings.gradle')
 apply plugin: 'com.android.library'
+apply from: rootProject.file('common.gradle')
 
 
 android {
@@ -36,9 +37,7 @@ dependencies {
     compile 'cn.bingoogolapple:bga-swipebacklayout:1.1.9@aar'
     implementation "com.android.support:design:$support_version"
 
-    implementation 'io.reactivex:rxjava:1.2.0'
-    implementation 'io.reactivex:rxandroid:1.2.1'
-    implementation 'com.google.code.gson:gson:2.8.1'
+
 
     implementation 'com.githang:status-bar-compat:0.7'
     implementation 'com.jaeger.statusbaruitl:library:1.4.0'

@@ -12,6 +12,8 @@
     <color name="color_train_red" >#da0079</color >
     <color name="train_lock_tv_blue4" >#0048fc</color >
     <color name="transparent" >#00000000</color >
+    <color name="textColor" >#142C4A</color >
+    <color name="textColorSecondary" >#9B9B9B</color >
 
 
 </resources >

@@ -5,6 +5,12 @@ public class CP {
     public static final String CP_UPDATE = "update";
     public static final String ACTION_UPDATE = "action_update";
 
+
+    //选择图片
+    public static final String CP_CHOOSE_PICTURE = "choosepicture";
+    public static final String ACTION_CHOOSE_PICTURE = "action_choosepicture";
+
+
     public static class Event {
         public static final String EVENT_UPDATE_UNREDA_MSG_COUNT = "event_update_unreda_msg_count";
 

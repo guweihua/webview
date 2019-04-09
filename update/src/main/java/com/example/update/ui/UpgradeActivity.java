@@ -69,6 +69,7 @@ public class UpgradeActivity extends BaseActivity {
     @Override
     protected void initThings(Bundle savedInstanceState) {
 
+
         tvVersion = findViewById(R.id.tv_version);
         tvFillsieze = findViewById(R.id.tv_fillsieze);
         tvUpdatetime = findViewById(R.id.tv_updatetime);
@@ -255,7 +256,7 @@ public class UpgradeActivity extends BaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.up_activity_up_grade;
+        return com.example.update.R.layout.up_activity_up_grade;
     }
 
 

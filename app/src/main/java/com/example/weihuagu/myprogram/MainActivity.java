@@ -1,20 +1,34 @@
 package com.example.weihuagu.myprogram;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.FrameLayout;
 
-import com.billy.cc.core.component.CC;
-import com.example.base.CP;
 import com.example.base.common.BaseActivity;
 import com.example.weihuagu.myprogram.widget.MainMenu;
-import com.tencent.bugly.beta.Beta;
+
+import butterknife.BindView;
 
 
 public class MainActivity extends BaseActivity {
 
 
     String url = "http://720yun.com/t/aog8omq6xqsr9oayij&uid=9&PHPSESSID=9hg80t1monauljfo72tfcvjf72";
+
+    @BindView(R.id.container)
+    FrameLayout container;
+    @BindView(R.id.main_menu)
+    MainMenu mainMenu;
+    @BindView(R.id.img_splash)
+    FrameLayout imgSplash;
+
+    private AlphaAnimation mHideAnimation;
 
 
     @Override
@@ -25,8 +39,18 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initThings(Bundle savedInstanceState) {
 
-        MainMenu mainMenu = findViewById(R.id.main_menu);
         mainMenu.enterHomeFragment();
+
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setHideAnimation(imgSplash, 2000);
+            }
+        }, 500);
 
     }
 
@@ -36,6 +60,45 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    public void setHideAnimation(final View view, int duration) {
 
 
+        // 监听动画结束的操作
+        AlphaAnimation mHideAnimation = new AlphaAnimation(1.0f, 0.0f);
+        mHideAnimation.setDuration(duration);
+        mHideAnimation.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation arg0) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+                view.setVisibility(View.GONE);
+
+
+            }
+        });
+        view.startAnimation(mHideAnimation);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 188){
+
+
+        }
+    }
 }
