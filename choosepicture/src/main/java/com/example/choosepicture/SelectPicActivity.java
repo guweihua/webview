@@ -3,7 +3,6 @@ package com.example.choosepicture;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.billy.cc.core.component.CC;
 import com.billy.cc.core.component.CCResult;
@@ -22,6 +21,12 @@ public class SelectPicActivity extends BaseActivity {
 
 
     private String call_id;
+    //是否圆形
+    private Boolean isCrop = false;
+    //最多几张
+    private int maxNum;
+    //1  全部  2 图片  3 视频   4 音频
+    private String type = "1";
 
     @Override
     public void initListeners() {
@@ -31,16 +36,28 @@ public class SelectPicActivity extends BaseActivity {
     @Override
     protected void initThings(Bundle savedInstanceState) {
 
-        ImagePictureSelectorUtils.multiSelect(SelectPicActivity.this);
 
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             call_id = extras.getString("call_id");
+            isCrop = extras.getBoolean("isCrop");
+            maxNum = extras.getInt("num");
+            type = extras.getString("type");
 
-            Log.e("Afas", "----" + call_id);
 
+        }
 
+        if (type.equals("1")) {
+            ImagePictureSelectorUtils.multiSelect(SelectPicActivity.this, maxNum);
+
+        } else if (type.equals("2")) {
+            ImagePictureSelectorUtils.selectPic(SelectPicActivity.this, maxNum, isCrop);
+
+        } else if (type.equals("3")) {
+            ImagePictureSelectorUtils.choseVideo(SelectPicActivity.this);
+        } else if (type.equals("4")) {
+            ImagePictureSelectorUtils.choseSound(SelectPicActivity.this);
         }
 
 
@@ -62,14 +79,11 @@ public class SelectPicActivity extends BaseActivity {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
 
-            if (selectList.size() > 1) {
+            if (selectList.size() > 0) {
                 for (LocalMedia entity : selectList) {
                     pathList.add(entity.getPath());
                 }
             }
-
-
-            Log.e("Asfafa", "----" + pathList);
 
 
             Map<String, Object> listMap = new HashMap<>();

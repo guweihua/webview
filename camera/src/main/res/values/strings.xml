@@ -1,0 +1,5 @@
+<resources >
+    <string name="app_name" >camera</string >
+    <string name="cannot_support_shot" >抱歉，暂时不支持该手机的拍摄</string >
+
+</resources >

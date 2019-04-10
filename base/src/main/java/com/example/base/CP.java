@@ -10,6 +10,10 @@ public class CP {
     public static final String CP_CHOOSE_PICTURE = "choosepicture";
     public static final String ACTION_CHOOSE_PICTURE = "action_choosepicture";
 
+    //拍照
+    public static final String CP_CAMERA = "camera";
+    public static final String ACTION_CAMERA = "action_camera";
+
 
     public static class Event {
         public static final String EVENT_UPDATE_UNREDA_MSG_COUNT = "event_update_unreda_msg_count";

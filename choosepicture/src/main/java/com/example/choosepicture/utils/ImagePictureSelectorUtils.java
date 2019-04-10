@@ -16,11 +16,11 @@ import com.luck.picture.lib.config.PictureMimeType;
 public class ImagePictureSelectorUtils {
 
     //进入相册，多选，做多选九张，相册里的照片和视频
-    public static void multiSelect(Context activity) {
+    public static void multiSelect(Context activity, int maxNum) {
         PictureSelector.create((Activity) activity)
                 .openGallery(PictureMimeType.ofAll())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
                 .theme(R.style.picture_white_style)//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
-                .maxSelectNum(9)// 最大图片选择数量 int
+                .maxSelectNum(maxNum)// 最大图片选择数量 int
                 //.minSelectNum()// 最小选择数量 int
                 //.imageSpanCount(4)// 每行显示个数 int
                 .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
@@ -58,16 +58,16 @@ public class ImagePictureSelectorUtils {
                 .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
-    //单选--图片
-    public static void radioSelect(Context activity) {
+    //图片
+    public static void selectPic(Context activity, int maxNum, Boolean isCrop) {
 
         PictureSelector.create((Activity) activity)
                 .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
                 .theme(R.style.picture_white_style)//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
-                .maxSelectNum(1)// 最大图片选择数量 int
+                .maxSelectNum(maxNum)// 最大图片选择数量 int
                 //.minSelectNum()// 最小选择数量 int
                 //.imageSpanCount(4)// 每行显示个数 int
-                .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
+                .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
                 .previewImage(true)// 是否可预览图片 true or false
                 //.previewVideo(true)// 是否可预览视频 true or false
                 //.enablePreviewAudio() // 是否可播放音频 true or false
@@ -83,7 +83,7 @@ public class ImagePictureSelectorUtils {
                 //.isGif()// 是否显示gif图片 true or false
                 //.compressSavePath(getPath())//压缩图片保存地址
                 //.freeStyleCropEnabled()// 裁剪框是否可拖拽 true or false
-                //.circleDimmedLayer()// 是否圆形裁剪 true or false
+                .circleDimmedLayer(false)// 是否圆形裁剪 true or false
                 .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
                 .showCropGrid(true)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                 //.openClickSound()// 是否开启点击声音 true or false
@@ -98,8 +98,8 @@ public class ImagePictureSelectorUtils {
                 // .videoQuality()// 视频录制质量 0 or 1 int
                 // .videoMaxSecond(15)// 显示多少秒以内的视频or音频也可适用 int
                 // .videoMinSecond(10)// 显示多少秒以内的视频or音频也可适用 int
-                .recordVideoSecond(15)//视频秒数录制 默认60s int
-                .forResult(PictureConfig.TYPE_AUDIO);//结果回调onActivityResult code
+                //.recordVideoSecond(15)//视频秒数录制 默认60s int
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
 
     }
 
@@ -191,7 +191,7 @@ public class ImagePictureSelectorUtils {
                 .videoMaxSecond(60)// 显示多少秒以内的视频or音频也可适用 int
                 .videoMinSecond(3)// 显示多少秒以内的视频or音频也可适用 int
                 //.recordVideoSecond(15)//视频秒数录制 默认60s int
-                .forResult(PictureConfig.TYPE_VIDEO);//结果回调onActivityResult code
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
 

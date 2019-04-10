@@ -39,6 +39,40 @@ public class choosePicDialog extends YDialog {
 
         tvCamera.setOnClickListener(v -> {
             dismiss();
+
+            CC.obtainBuilder(CP.CP_CAMERA)
+                    .setActionName(CP.ACTION_CAMERA)
+                    .setContext(getContext())
+                    .build()
+                    .callAsync(new IComponentCallback() {
+                        @Override
+                        public void onResult(CC cc, CCResult result) {
+
+                            if (result.getCode() == 0) {
+                                //url
+                                String url = result.getDataItem("url");
+                                //视频还是照片  1拍照  2 录像
+                                String videotype = result.getDataItem("videotype");
+                                ((Activity) getContext()).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toasts.toast(getContext(), videotype + ":" + url);
+                                    }
+                                });
+
+                            } else {
+                                ((Activity) getContext()).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toasts.toast(getContext(), "拍照或拍摄有误");
+                                    }
+                                });
+                            }
+
+
+                        }
+                    });
+
         });
 
         tvChoosePic.setOnClickListener(v -> {
@@ -47,6 +81,9 @@ public class choosePicDialog extends YDialog {
 
             CC.obtainBuilder(CP.CP_CHOOSE_PICTURE)
                     .setActionName(CP.ACTION_CHOOSE_PICTURE)
+                    .addParam("isCrop",true)
+                    .addParam("num",9)
+                    .addParam("type","1")
                     .setContext(getContext())
                     .build()
                     .callAsync(new IComponentCallback() {

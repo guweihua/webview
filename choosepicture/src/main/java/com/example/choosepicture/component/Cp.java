@@ -25,7 +25,10 @@ public class Cp implements IComponent {
         switch (actionName) {
             case CP.ACTION_CHOOSE_PICTURE:
 
-//                String isCrop = cc.getParamItem("isCrop");
+                //视频  音频  图片  全部
+                String type = cc.getParamItem("type");
+                boolean isCrop = cc.getParamItem("isCrop");
+                int num = cc.getParamItem("num");
 
                 Log.e("Afas", "ACTION_CHOOSE_PICTURE");
 
@@ -38,6 +41,9 @@ public class Cp implements IComponent {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("call_id", cc.getCallId());
+                bundle.putBoolean("isCrop", isCrop);
+                bundle.putInt("num", num);
+                bundle.putString("type", type);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);
