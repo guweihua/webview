@@ -1,1 +1,1 @@
-include ':app', ':update', ':base', ':choosepicture',':camera'
+include ':app', ':update', ':base', ':choosepicture',':camera', ':sdk'
