@@ -3,7 +3,9 @@ apply from: rootProject.file('cc-settings.gradle')
 apply plugin: 'com.jakewharton.butterknife'
 apply from: rootProject.file('common.gradle')
 
-
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion 28
@@ -17,10 +19,33 @@ android {
         ndk { abiFilters "armeabi" }
 
     }
+
+    /**
+     * 签名相关配置
+     * */
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias_']
+            keyPassword keystoreProperties['keyPassword_']
+            storeFile file(keystoreProperties['storeFile_'])
+            storePassword keystoreProperties['storePassword_']
+            v2SigningEnabled true
+
+        }
+    }
+
+
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable true  // 不显示Log false
+            zipAlignEnabled true
+            //去除没有用到的资源文件，要求minifyEnabled为true才生效
+            shrinkResources true
+            //开启混淆
+            minifyEnabled true
+            // 混淆文件的位置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -50,6 +75,9 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
     testImplementation 'junit:junit:4.12'
     implementation "com.android.support:design:$support_version"
+
+    //编译CommonSDK模块，但是去掉此模块中对com.android.support的依赖，防止重复依赖报错
+   // compile (project(':CommonSDK')) { exclude group: "com.android.support" }
 
     addComponent 'update'
     addComponent 'choosepicture'
