@@ -1,16 +1,15 @@
 //apply from: rootProject.file('cc-settings.gradle')
 apply plugin: 'com.android.library'
-apply from: rootProject.file('common.gradle')
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion Integer.valueOf("$min_sdk_version")
-        targetSdkVersion Integer.valueOf("$target_sdk_version")
-        versionCode Integer.valueOf("$application_version_code")
-        versionName "$application_version_name"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
     }
 
 
@@ -33,14 +32,33 @@ android {
 
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation rootProject.ext.dependencies["appcompat-v7"]
     compile 'cn.bingoogolapple:bga-swipebacklayout:1.1.9@aar'
-    implementation "com.android.support:design:$support_version"
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["status-bar-compat"]
+    implementation rootProject.ext.dependencies["statusbaruitl"]
+//    {
+//        exclude group: 'io.reactivex.rxjava2:rxandroid', module: 'base:'
+//        exclude group: 'io.reactivex.rxjava2:rxjava', module: 'base:'
+//
+//    }
+    implementation rootProject.ext.dependencies["swipebackactivity"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit-converter-gson"]
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+
+        api 'com.readystatesoftware.chuck:library:1.1.0'
 
 
-
-    implementation 'com.githang:status-bar-compat:0.7'
-    implementation 'com.jaeger.statusbaruitl:library:1.4.0'
-    implementation 'org.dync.kathline:swipebackactivity:1.0.1'
-
+//    configurations.all {
+//        resolutionStrategy.force "io.reactivex.rxjava2:rxandroid:2.1.1"
+//    }
+//
+//    configurations.all {
+//        resolutionStrategy.force "io.reactivex.rxjava2:rxjava:2.2.8"
+//    }
 }

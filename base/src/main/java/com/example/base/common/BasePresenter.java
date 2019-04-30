@@ -9,21 +9,21 @@ import com.example.base.common.inter.OnAcceptDataListener;
 import com.example.base.common.inter.OnAcceptResListener;
 import com.example.base.common.inter.OnBindLocalListener;
 import com.example.base.common.inter.Res;
-import com.example.base.common.inter.SB;
-import com.example.base.utils.NetUtils;
 import com.example.base.utils.Toasts;
 import com.example.base.widget.dialog.Dialog;
+
+import org.reactivestreams.Subscription;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import rx.Observable;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 import static com.example.base.utils.NetUtils.isNetAvailable;
-import static rx.android.schedulers.AndroidSchedulers.mainThread;
-import static rx.schedulers.Schedulers.io;
 
 
 /**
@@ -33,7 +33,6 @@ public abstract class BasePresenter<V extends BaseView> {
 
 
     public V view;
-    protected CompositeSubscription mCompositeSubscription;
 
     public void attachView(V view) {
         this.view = view;
@@ -46,17 +45,12 @@ public abstract class BasePresenter<V extends BaseView> {
 
     public void detachView() {
         this.view = null;
-        if (this.mCompositeSubscription != null) {
-            this.mCompositeSubscription.unsubscribe();
-        }
+
     }
 
     public void addSubscription(Subscription s) {
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
-        }
 
-        this.mCompositeSubscription.add(s);
+
     }
 
 
@@ -69,62 +63,70 @@ public abstract class BasePresenter<V extends BaseView> {
 
     public void requestPageNormalData(Observable<? extends Res> observable, OnAcceptDataListener onAcceptDataListener) {
 
-        Subscription subscription =
-                observable
-                        .subscribeOn(io())
-                        .doOnSubscribe(() -> {
-                            if (isNetAvailable(view.getContext())) {
-                                view.onError(BaseView.ERROR_LOADING, null);
-                            }
-                        })
-                        .subscribeOn(mainThread())
-                        .observeOn(mainThread())
-                        .subscribe(new SB<Res>() {
-                            @Override
-                            public void onError(Throwable e) {
-                                super.onError(e);
 
-                                if (view == null) {
-                                    return;
-                                }
-                                if (!isNetAvailable(view.getContext())) {
-                                    view.onErrorFail(BaseView.ERROR_NO_NET, v -> requestPageNormalData(observable, onAcceptDataListener));
-                                } else if (e instanceof SocketTimeoutException || e instanceof SocketException) {
-                                    view.toast(R.string.time_out);
-                                    view.onErrorFail(BaseView.ERROR_NO_DATA, v -> requestPageNormalData(observable, onAcceptDataListener));
-                                } else {
-                                    view.onErrorFail(BaseView.ERROR_FAIL, v -> requestPageNormalData(observable, onAcceptDataListener));
-                                }
-                            }
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                if (isNetAvailable(view.getContext())) {
+                    view.onError(BaseView.ERROR_LOADING, null);
+                }
+            }
+        }).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-                            @Override
-                            public void next(Res res) {
+            }
 
-                                if (res.isOk(view.getContext())) {
-                                    view.onError(BaseView.ERROR_NORMAL, null);
-                                    if (onAcceptDataListener != null) {
-                                        onAcceptDataListener.onAcceptData(res.getData(), res.getMsg(), res.getPoint());
+            @Override
+            public void onNext(Object o) {
 
-                                    }
-                                } else {
+                Res res = (Res) o;
 
-                                    if (res.getStatus() == 0) {
-                                        if (onAcceptDataListener != null) {
-                                            onAcceptDataListener.onAcceptData(res.getData(), res.getMsg(), res.getPoint());
-                                        }
+                if (res.isOk(view.getContext())) {
+                    view.onError(BaseView.ERROR_NORMAL, null);
+                    if (onAcceptDataListener != null) {
+                        onAcceptDataListener.onAcceptData(res.getData(), res.getMsg(), res.getPoint());
 
-                                    } else if (res.getStatus() == 10) {
-                                        Toasts.toast(view.getContext(), res.getMsg());
-                                        view.onError(10, "", "", null, "", null);
-                                    } else {
-                                        // view.onErrorFail(ERROR_NO_DATA, v -> requestPageNormalData(observable, onAcceptDataListener));
+                    }
+                } else {
 
-                                    }
-                                }
-                            }
-                        });
+                    if (res.getStatus() == 0) {
+                        if (onAcceptDataListener != null) {
+                            onAcceptDataListener.onAcceptData(res.getData(), res.getMsg(), res.getPoint());
+                        }
 
-        addSubscription(subscription);
+                    } else if (res.getStatus() == 10) {
+                        Toasts.toast(view.getContext(), res.getMsg());
+                        view.onError(10, "", "", null, "", null);
+                    } else {
+                        // view.onErrorFail(ERROR_NO_DATA, v -> requestPageNormalData(observable, onAcceptDataListener));
+
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (view == null) {
+                    return;
+                }
+                if (!isNetAvailable(view.getContext())) {
+                    view.onErrorFail(BaseView.ERROR_NO_NET, v -> requestPageNormalData(observable, onAcceptDataListener));
+                } else if (e instanceof SocketTimeoutException || e instanceof SocketException) {
+                    view.toast(R.string.time_out);
+                    view.onErrorFail(BaseView.ERROR_NO_DATA, v -> requestPageNormalData(observable, onAcceptDataListener));
+                } else {
+                    view.onErrorFail(BaseView.ERROR_FAIL, v -> requestPageNormalData(observable, onAcceptDataListener));
+                }
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+
     }
 
 
@@ -162,96 +164,105 @@ public abstract class BasePresenter<V extends BaseView> {
     }
 
     public void requestNormalData(Observable<? extends Res> observable, OnAcceptDataListener onAcceptDataListener, OnAcceptResListener onAcceptResListener, OnBindLocalListener onBindLocalListener, boolean isNeedProgress, int strResId) {
-        Subscription subscription =
-                observable
-                        .subscribeOn(io())
-                        .doOnSubscribe(() -> {
-                            if (isNetAvailable(view.getContext())) {
-                                if (isNeedProgress) {
-                                    Dialog.showProgressingDialog(view.getContext(), strResId == -1 ? view.getContext().getString(R.string.loading) : view.getContext().getString(strResId));
-                                }
-                            }
-                        })
-                        .subscribeOn(mainThread())
-                        .observeOn(mainThread())
-                        .subscribe(new SB<Res>() {
-                            @Override
-                            public void onError(Throwable e) {
-                                super.onError(e);
-                                if (view == null) {
-                                    return;
-                                }
-                                if (isNeedProgress) {
-                                    Dialog.dismissProgressDialog();
-                                }
+
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                if (isNetAvailable(view.getContext())) {
+                    if (isNeedProgress) {
+                        Dialog.showProgressingDialog(view.getContext(), strResId == -1 ? view.getContext().getString(R.string.loading) : view.getContext().getString(strResId));
+                    }
+                }
+            }
+        }).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+                Res res = (Res) o;
+
+                if (isNeedProgress) {
+                    Dialog.dismissProgressDialog();
+                }
+
+                /** 说明:
+                 *如果要自己处理,就不执行以下操作了
+                 */
+                if (onAcceptResListener != null) {
+                    Log.d("BasePresenter", "onAcceptResListener is null");
 
 
-                                if (!isNetAvailable(view.getContext())) {
-                                    view.onErrorFail(BaseView.ERROR_NO_NET, v -> requestPageNormalData(observable, onAcceptDataListener));
-                                } else if (e instanceof SocketTimeoutException || e instanceof SocketException) {
-                                    view.toast(R.string.time_out);
-                                    view.onErrorFail(BaseView.ERROR_NO_DATA, v -> requestPageNormalData(observable, onAcceptDataListener));
-                                } else {
-                                    view.onErrorFail(BaseView.ERROR_FAIL, v -> requestPageNormalData(observable, onAcceptDataListener));
-                                }
-                            }
+                    //登录状态  出现问题  被举报
+                    if (res.getStatus() == 0) {
 
-                            @Override
-                            public void next(Res res) {
+                        onAcceptResListener.onResAccept(res);
+
+                    } else if (res.getStatus() == 10) {
+                        Toasts.toast(view.getContext(), res.getMsg());
+                        view.onError(10, "", "", null, "", null);
+                    } else {
 
 
-                                if (isNeedProgress) {
-                                    Dialog.dismissProgressDialog();
-                                }
-
-                                /** 说明:
-                                 *如果要自己处理,就不执行以下操作了
-                                 */
-                                if (onAcceptResListener != null) {
-                                    Log.d("BasePresenter", "onAcceptResListener is null");
+                        onAcceptResListener.onResAccept(res);
+                    }
 
 
-                                    //登录状态  出现问题  被举报
-                                    if (res.getStatus() == 0) {
+                } else {
+                    if (res.isOk(view.getContext())) {
+                        Log.d("BasePresenter", "onAcceptDataListener is  ok");
 
-                                        onAcceptResListener.onResAccept(res);
+                        if (onAcceptDataListener != null) {
+                            onAcceptDataListener.onAcceptData(res.getData(), res.getMsg(), res.getPoint());
 
-                                    } else if (res.getStatus() == 10) {
-                                        Toasts.toast(view.getContext(), res.getMsg());
-                                        view.onError(10, "", "", null, "", null);
-                                    } else {
+                        }
+                        if (onBindLocalListener != null) {
+                            onBindLocalListener.onSaveLocal(res.getData());
+                        }
+                    } else {
+                        Log.d("BasePresenter", "onAcceptDataListener is not ok");
+                        if (res.getStatus() == 10) {
+                            Toasts.toast(view.getContext(), res.getMsg());
+                            view.onError(10, "", "", null, "", null);
+                        }
 
+                    }
+                }
+            }
 
-                                        onAcceptResListener.onResAccept(res);
-                                    }
-
-
-                                } else {
-                                    if (res.isOk(view.getContext())) {
-                                        Log.d("BasePresenter", "onAcceptDataListener is  ok");
-
-                                        if (onAcceptDataListener != null) {
-                                            onAcceptDataListener.onAcceptData(res.getData(), res.getMsg(), res.getPoint());
-
-                                        }
-                                        if (onBindLocalListener != null) {
-                                            onBindLocalListener.onSaveLocal(res.getData());
-                                        }
-                                    } else {
-                                        Log.d("BasePresenter", "onAcceptDataListener is not ok");
-                                        if (res.getStatus() == 10) {
-                                            Toasts.toast(view.getContext(), res.getMsg());
-                                            view.onError(10, "", "", null, "", null);
-                                        }
-
-                                    }
-                                }
-                            }
-
-                        });
+            @Override
+            public void onError(Throwable e) {
+                if (view == null) {
+                    return;
+                }
+                if (isNeedProgress) {
+                    Dialog.dismissProgressDialog();
+                }
 
 
-        addSubscription(subscription);
+                if (!isNetAvailable(view.getContext())) {
+                    view.onErrorFail(BaseView.ERROR_NO_NET, v -> requestPageNormalData(observable, onAcceptDataListener));
+                } else if (e instanceof SocketTimeoutException || e instanceof SocketException) {
+                    view.toast(R.string.time_out);
+                    view.onErrorFail(BaseView.ERROR_NO_DATA, v -> requestPageNormalData(observable, onAcceptDataListener));
+                } else {
+                    view.onErrorFail(BaseView.ERROR_FAIL, v -> requestPageNormalData(observable, onAcceptDataListener));
+                }
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+
+
+
+
     }
 
 

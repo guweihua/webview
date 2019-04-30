@@ -6,7 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public abstract class BaseActivity extends AppCompatActivity {
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+public abstract class BaseActivity extends com.example.base.common.BaseActivity {
+
+    private Unbinder unBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -14,6 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
         setContentView(provideContentViewId());
+        unBinder = ButterKnife.bind(this);
+
 
         initThings(savedInstanceState);
         initListeners();
@@ -55,6 +62,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         View view = findViewById(id);
         if (view != null) {
             view.setOnClickListener(mOnClickListener);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (unBinder != null) {
+            unBinder.unbind();
         }
     }
 }

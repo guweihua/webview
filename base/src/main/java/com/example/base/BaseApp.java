@@ -11,7 +11,6 @@ import java.util.List;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import me.jessyan.autosize.AutoSize;
-import me.jessyan.autosize.external.ExternalAdaptManager;
 
 
 /**

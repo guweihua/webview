@@ -1,30 +1,28 @@
 package com.example.base.common.inter;
 
-import rx.Subscriber;
+import org.reactivestreams.Subscriber;
+
 
 /**
  * Subscriber的封装类，打印一些信息等。。
  * Created by xianguangjin on 15/12/15.
  */
-public abstract class SB<T> extends Subscriber<T> {
+public abstract class SB<T>  {
 
 
 
-    @Override
+
     public void onNext(T t) {
         next(t);
     }
 
-    @Override
+
     public void onError(Throwable e) {
         error(e);
     }
 
 
-    @Override
-    public void onCompleted() {
-        completed();
-    }
+
 
     public void completed() {
 
