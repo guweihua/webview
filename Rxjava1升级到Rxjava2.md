@@ -11,7 +11,7 @@
       
       2.3 RxJava 1.0 中Observable不能很好支持背压，在RxJava2.0 中将Oberservable彻底实现成不支持背压，而新增Flowable 来支持背压。
       
-      2.4  Rxjava 2.0开始支持Reactive Streams。
+      2.4 Rxjava 2.0开始支持Reactive Streams。
    
        
   2. Observable
@@ -175,11 +175,17 @@
       
       4.1  ActionX 和 FuncX 改名对于 ActionX接口名的更改
       
-      RxJava 1	RxJava 2
-      Action0	Action
-      Action1	Consumer（接收1个参数）
-      Action2	BiConsumer （接收2个参数）
-      ActionN	Consumer
+       ---------|---------
+      RxJava 1	| RxJava 2
+       ---------|---------
+      Action0	| Action
+       ---------|---------
+      Action1	| Consumer（接收1个参数）
+       ---------|---------
+      Action2	| BiConsumer （接收2个参数）
+       ---------|---------
+      ActionN	| Consumer
+       ---------|---------
       
       4.2 RxJava2的接口方法都允许抛出异常
       
@@ -192,11 +198,14 @@
        需要强调的是first（）、subscribeWith（）和 compose()操作符
 
       5.1 first（）操作符
+      RxJava 1.0  |	RxJava 2.0
       
-      RxJava 1.0	RxJava 2.0
       first（）	改名为：firstElement（）
+      
       first(Func1)	弃用，改用为：filter(predicate).first()
+      
       firstOrDefault(T)	改名为：first（T）
+      
       firstOrDefault(Func1, T)	改名为：first（T）
 
       ```
