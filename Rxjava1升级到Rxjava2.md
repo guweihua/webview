@@ -178,13 +178,9 @@
       | RxJava 1	| RxJava 2
       |  ---------|---------
       | Action0	| Action
-      |  ---------|---------
       | Action1	| Consumer（接收1个参数）
-      |  ---------|---------
       | Action2	| BiConsumer （接收2个参数）
-      |  ---------|---------
       | ActionN	| Consumer
-      |  ---------|---------
       
       4.2 RxJava2的接口方法都允许抛出异常
       
