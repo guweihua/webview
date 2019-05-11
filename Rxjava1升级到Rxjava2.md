@@ -193,15 +193,16 @@
        需要强调的是first（）、subscribeWith（）和 compose()操作符
 
       5.1 first（）操作符
-      RxJava 1.0  |	RxJava 2.0
       
-      first（）	改名为：firstElement（）
+      |RxJava 1.0  |	RxJava 2.0
+        |  ---------|---------
+      | first（）	| 改名为：firstElement（）
       
-      first(Func1)	弃用，改用为：filter(predicate).first()
+      | first(Func1) |	弃用，改用为：filter(predicate).first()
       
-      firstOrDefault(T)	改名为：first（T）
+      |firstOrDefault(T) |	改名为：first（T）
       
-      firstOrDefault(Func1, T)	改名为：first（T）
+      | firstOrDefault(Func1, T)	| 改名为：first（T）
 
       ```
       <-- RxJava 1.0 -->
