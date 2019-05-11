@@ -226,12 +226,11 @@
       
       5.2   subscribeWith（）操作符
          
-      背景： 在Rxjava2中，subscribeWith()返回的事Disposable而不是Subscription
+          背景： 在Rxjava2中，subscribeWith()返回的事Disposable而不是Subscription
       
-      冲突：  保持向后的兼容（对于Rxjava1）
+          冲突：  保持向后的兼容（对于Rxjava1）
       
-      解决方案：  Flowable 提供SubscribeWith()返回当前的观察者Subscriberd对象
-      			同时提供DefaultSubsriber,ResourceSubscriber,DisPosableSubscriber接口(用于提供Disposable对象)从而管理生命周期
+          解决方案：  Flowable 提供SubscribeWith()返回当前的观察者Subscriberd对象同时提供DefaultSubsriber,ResourceSubscriber,DisPosableSubscriber接口(用于提供Disposable对象)从而管理生命周期
       			
       5.3 compose（）操作符
       
@@ -243,19 +242,19 @@
      
       6.1  新增Processor
      
-        作用类似于 Subject & 继承自 Flowable = 支持背压控制而Subject则 不支持背压控制
+          作用类似于 Subject & 继承自 Flowable = 支持背压控制而Subject则 不支持背压控制
      
       6.2  更改Single
      
-        Single的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受到1次
+          Single的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受到1次
      
       6.3  更改Completable
      
-        Completable的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受 Complete 和 onError事件
+          Completable的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受 Complete 和 onError事件
      
       6.4 事件订阅RxBus
      
-        事件总线方法发生变化    
+          事件总线方法发生变化    
  
          ```
         <-- rxjava1: -->
