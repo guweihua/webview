@@ -176,7 +176,7 @@
       4.1  ActionX 和 FuncX 改名对于 ActionX接口名的更改
       
       ```
-       ---------|---------
+      
       RxJava 1	| RxJava 2
        ---------|---------
       Action0	| Action
