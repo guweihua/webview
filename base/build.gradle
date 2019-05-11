@@ -51,7 +51,13 @@ dependencies {
     api rootProject.ext.dependencies["retrofit-converter-gson"]
     api rootProject.ext.dependencies["retrofit-adapter-rxjava"]
 
-        api 'com.readystatesoftware.chuck:library:1.1.0'
+    debugCompile (rootProject.ext.dependencies["debugchuck"]){
+        exclude group: 'com.android.support:design'
+    }
+    releaseCompile (rootProject.ext.dependencies["releasechuck"]){
+        exclude group: 'com.android.support:design'
+    }
+//        api 'com.readystatesoftware.chuck:library:1.1.0'
 
 
 //    configurations.all {

@@ -1,6 +1,14 @@
 package com.example.weihuagu.myprogram.utils;
 
+import android.util.Log;
+
+import com.example.weihuagu.myprogram.inter.AndroidScheduler;
+import com.example.weihuagu.myprogram.inter.Res;
+
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import rx.functions.Func1;
 
 public class NetEngine {
 
@@ -26,5 +34,16 @@ public class NetEngine {
     public static OkHttpClient getClient() {
         return com.example.base.utils.NetEngine.getClient();
     }
+
+
+    protected  <T> Observable<T> observe(Observable<T> observable){
+        return observable
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread());
+    }
+
+
+
 
 }
