@@ -195,13 +195,10 @@
       5.1 first（）操作符
       
       |RxJava 1.0  |	RxJava 2.0
-        |  ---------|---------
+      |  ---------|---------
       | first（）	| 改名为：firstElement（）
-      
       | first(Func1) |	弃用，改用为：filter(predicate).first()
-      
       |firstOrDefault(T) |	改名为：first（T）
-      
       | firstOrDefault(Func1, T)	| 改名为：first（T）
 
       ```
