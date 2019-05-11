@@ -241,24 +241,25 @@
      
      6.1  新增Processor
      
-     作用类似于 Subject & 继承自 Flowable = 支持背压控制而Subject则 不支持背压控制
+        作用类似于 Subject & 继承自 Flowable = 支持背压控制而Subject则 不支持背压控制
      
      6.2  更改Single
      
-     Single的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受到1次
+        Single的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受到1次
      
      6.3  更改Completable
      
-     Completable的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受 Complete 和 onError事件
+        Completable的作用类似于 Observable = 发送数据，但区别在于订阅后只能接受 Complete 和 onError事件
      
      6.4 事件订阅RxBus
      
+        事件总线方法发生变化    
+ 
          ```
         <-- rxjava1: -->
-     	private final Subject<Object, Object> bus = new 	SerializedSubject<>(PublishSubject.create());
-       <--  rxjava2: -->
-     	private final FlowableProcessor<Object>bus = PublishProcessor.create().toSerialized();
-     	
-        ```
+     	private final Subject<Object, Object> bus = new SerializedSubject<>(PublishSubject.create());
+        <--  rxjava2: -->
+     	private final FlowableProcessor<Object> bus = PublishProcessor.create().toSerialized();   	
+   ```
      
       
