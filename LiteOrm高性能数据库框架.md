@@ -12,7 +12,9 @@
 
     ![](https://camo.githubusercontent.com/de82e4a949bd859fbe397a42cf07fb9318bc3b40/687474703a2f2f6c69746573756974732e636f6d2f696d67732f6c6974652d3130772d746573742e706e67)
 
+
     ###设计原则 :
+
 
     轻量、专注、性能优先、线程无关，专注数据及其关系存储和操作。
 
@@ -20,7 +22,9 @@
 
     使用极致简约，例如：db.save(u); db.query(U.class); db.deleteAll(U.class);
 
+
     ###功能特点 :
+
 
     支持多库：每个数据库文件对应一个LiteOrm管理类实例。
 
@@ -51,6 +55,7 @@
     约束性语法支持：NOT NULL, UNIQUE, DEFAULT, COLLATE, CHECK, PRIMARY KEY，支持冲突算法。
 
     灵活的查询和删除：columns, where, roder, limit, having group, etc。
+
 
 2. 快速起步：初始化应保持单例
 
