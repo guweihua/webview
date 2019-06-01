@@ -8,55 +8,55 @@
 
   自动化且比系统自带数据库操作快1倍！
 
-    LiteOrm是android上的一款数据库（ORM）框架库。速度快、体积小、性能高。开发者基本一行代码实现数据库的增删改查操作，以及实体关系的持久化和自动映射。
+  LiteOrm是android上的一款数据库（ORM）框架库。速度快、体积小、性能高。开发者基本一行代码实现数据库的增删改查操作，以及实体关系的持久化和自动映射。
 
-    10万条数插入对比系统API
+  10万条数插入对比系统API
 
-    ![](https://camo.githubusercontent.com/de82e4a949bd859fbe397a42cf07fb9318bc3b40/687474703a2f2f6c69746573756974732e636f6d2f696d67732f6c6974652d3130772d746573742e706e67)
-
-
-    ###设计原则 :
+  ![](https://camo.githubusercontent.com/de82e4a949bd859fbe397a42cf07fb9318bc3b40/687474703a2f2f6c69746573756974732e636f6d2f696d67732f6c6974652d3130772d746573742e706e67)
 
 
-    轻量、专注、性能优先、线程无关，专注数据及其关系存储和操作。
-
-    无需工具辅助，不需要无参构造，不需要繁多注解，约定优于配置。
-
-    使用极致简约，例如：db.save(u); db.query(U.class); db.deleteAll(U.class);
+  ###设计原则 :
 
 
-    ###功能特点 :
+  轻量、专注、性能优先、线程无关，专注数据及其关系存储和操作。
+
+  无需工具辅助，不需要无参构造，不需要繁多注解，约定优于配置。
+
+  使用极致简约，例如：db.save(u); db.query(U.class); db.deleteAll(U.class);
 
 
-    支持多库：每个数据库文件对应一个LiteOrm管理类实例。
+  ###功能特点 :
 
-    SD卡存储：可以将DB文件放在你认为合理的位置。
 
-    自动建表：开发者无需关心数据库以及表细节。
+  支持多库：每个数据库文件对应一个LiteOrm管理类实例。
 
-    库文件操作：新建、打开、删除、释放一个数据库文件。
+  SD卡存储：可以将DB文件放在你认为合理的位置。
 
-    独立操作：使用 LiteOrm 的 single 实例，可与 cascade 方式平滑切换，性能高，仅处理该对象数据，其关系、和关联对象忽略；
+  自动建表：开发者无需关心数据库以及表细节。
 
-    级联操作：使用 LiteOrm 的 cascade 实例，可与 single 方式平滑切换，全递归，该对象数据，及其关系、和关联对象都被处理；
+  库文件操作：新建、打开、删除、释放一个数据库文件。
 
-    关系存储和恢复：真正实现实体关系映射持久化以及恢复，只需在实体的关联属性上标出关系类型即可。
+  独立操作：使用 LiteOrm 的 single 实例，可与 cascade 方式平滑切换，性能高，仅处理该对象数据，其关系、和关联对象忽略；
 
-    智能列探测：App升级或者Model改变，新加了属性字段，该字段将被探测到并加入数据库中，因此无需担心新字段不被存储。
+  级联操作：使用 LiteOrm 的 cascade 实例，可与 single 方式平滑切换，全递归，该对象数据，及其关系、和关联对象都被处理；
 
-    丰富API支持：save(replace), insert, update, delete, query, mapping, etc。
+  关系存储和恢复：真正实现实体关系映射持久化以及恢复，只需在实体的关联属性上标出关系类型即可。
 
-    自动识别类型：分别转化为以sqlite支持的TEXT, REAL, INTEGER, BLOB几种数据类型存储。
+  智能列探测：App升级或者Model改变，新加了属性字段，该字段将被探测到并加入数据库中，因此无需担心新字段不被存储。
 
-    自动构建对象，通过反射和探测构造函数参数等hack手法新建对象，大多情况下亦不需要无参构造函数。
+  丰富API支持：save(replace), insert, update, delete, query, mapping, etc。
 
-    更新指定列，可灵活、强制、批量赋值，强制赋值将无视被操作对象的真实值。
+  自动识别类型：分别转化为以sqlite支持的TEXT, REAL, INTEGER, BLOB几种数据类型存储。
 
-    存储序列化字段：Date、ArrayList、Vector等各种容器智能保存及读取。
+  自动构建对象，通过反射和探测构造函数参数等hack手法新建对象，大多情况下亦不需要无参构造函数。
 
-    约束性语法支持：NOT NULL, UNIQUE, DEFAULT, COLLATE, CHECK, PRIMARY KEY，支持冲突算法。
+  更新指定列，可灵活、强制、批量赋值，强制赋值将无视被操作对象的真实值。
 
-    灵活的查询和删除：columns, where, roder, limit, having group, etc。
+  存储序列化字段：Date、ArrayList、Vector等各种容器智能保存及读取。
+
+  约束性语法支持：NOT NULL, UNIQUE, DEFAULT, COLLATE, CHECK, PRIMARY KEY，支持冲突算法。
+
+  灵活的查询和删除：columns, where, roder, limit, having group, etc。
 
 
 2. 快速起步：初始化应保持单例
